@@ -1,12 +1,10 @@
 const express = require('express');
 const { Sequelize, DataTypes } = require('sequelize');
 const config = require('./config');
-
 const app = express();
 const port = 3000;
 
 const sequelize = new Sequelize(config.development);
-
 const Contact = require('./models/contact')(sequelize, DataTypes);
 
 app.use(express.json());
@@ -93,6 +91,25 @@ app.post('/identify', async (req, res) => {
     }
 });
 
+    // Delete all records from the Contact table
+    // ONLY FOR TESTING purposes
+app.post('/deletecontact', async (req, res) => {
+    try {
+        await Contact.destroy({
+            where: {}, 
+            truncate: true, 
+            restartIdentity: true, // Reset the auto-increment counter
+            cascade: true,
+        });
+
+        res.status(200).json({ message: 'All contacts deleted successfully.' });
+    } catch (error) {
+        console.error('An error occurred while deleting contacts:', error.message);
+        res.status(500).json({ error: 'Internal Server Error', details: 'An unexpected error occurred.' });
+    }
+});
+    
+
 // Function to construct the response payload
 function responsePayload(existContact, newcontact) {
     const emails = [existContact.email, ...newcontact.map(c => c.email)];
@@ -111,6 +128,9 @@ function responsePayload(existContact, newcontact) {
 }
 
 // Start the server
-app.listen(port, () => {
-    console.log(`Server is running at http://localhost:${port}`);
-});
+if (process.env.NODE_ENV !== 'test') {
+    app.listen(port, () => {
+        console.log(`Server is running at http://localhost:${port}`);
+    });
+}
+module.exports = app;
