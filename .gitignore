@@ -1,1 +1,8 @@
-env
+# Node.js
+node_modules/
+
+# Sequelize config
+config/config.json
+
+# Environment files
+.env*
