@@ -61,7 +61,8 @@ Create a .env file in the root directory with the following content:
   ```plaintext
     DATABASE_URL=your_database_url
   ```
-    Run Migrations:
+    
+   Run Migrations:
     
   ```bash
     npx sequelize-cli db:migrate
