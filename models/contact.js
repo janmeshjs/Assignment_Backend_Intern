@@ -1,3 +1,6 @@
+
+// Contact model with specific fields and their data types
+
 module.exports = (sequelize, DataTypes) => {
     const Contact = sequelize.define('Contact', {
         phoneNumber: DataTypes.STRING,
@@ -8,3 +11,4 @@ module.exports = (sequelize, DataTypes) => {
 
     return Contact;
 };
+

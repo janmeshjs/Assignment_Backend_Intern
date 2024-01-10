@@ -3,7 +3,11 @@
 /** @type {import('sequelize-cli').Migration} */
 
 module.exports = {
+
+// The 'up' function is responsible for defining the changes to be applied when migrating up
   up: async (queryInterface, Sequelize) => {
+    
+    // To Create the 'Contacts' table with specific columns and data types
     await queryInterface.createTable('Contacts', {
       id: {
         allowNull: false,
@@ -40,6 +44,7 @@ module.exports = {
     });
   },
 
+  // The 'down' function is responsible for defining the changes to be applied when rolling back
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('Contacts');
   },
