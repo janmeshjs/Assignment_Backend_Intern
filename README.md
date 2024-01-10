@@ -42,8 +42,9 @@ Key requirements include:
   ```bash
   cd zamazon-contact-consolidation
   npm install
-  This installs the required dependencies for the project.
   ```
+  This installs the required dependencies for the project.
+
 
 
 
